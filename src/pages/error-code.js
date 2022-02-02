@@ -1,0 +1,68 @@
+import React from 'react'
+import "./error-code.css"
+import { Button } from "./components/Button"
+import { MdOutlinePhoneAndroid } from 'react-icons/md';
+import { FiShield } from 'react-icons/fi';
+import { AiOutlineCode } from 'react-icons/ai'
+import { AiOutlinePercentage } from 'react-icons/ai'
+
+function ErrorCodePage() { 
+    return (
+        <>
+            <div className='main-body'>
+                <main id='main-doc'>
+                    <section class="main-section" id="emulator-detection">
+                        <header>Error Code: Emulator</header>
+                        <p>
+                            You are running the Game on an Android Emulator / Virtual Machine, please consider using a real device for the purposes of fair gameplay.
+                        </p>
+                    </section>
+
+                    <section class="main-section" id="cheating-apps">
+                        <header>Error Code: CheatingApp</header>
+                        <p>
+                            You probably have an app installed on your device that is used for Cheating. The following apps are currently blacklisted:
+                            <table>
+                                <tr>
+                                    <th>Blacklisted App</th>
+                                    <th>Official Website</th>
+                                </tr>
+                                <tr>
+                                    <td>Game Guardian</td>
+                                    <a href="http://www.gameguardian.net" target="_blank"><button>gameguardian.net</button></a>
+                                </tr>
+                                <tr>
+                                    <td>Lucky Patcher</td>
+                                    <a href="http://www.luckypatchers.com" target="_blank"><button>luckypatchers.com</button></a>
+                                </tr>
+                                <tr>
+                                    <td>Game Killer</td>
+                                    <a href="http://www.gamekiller.net" target="_blank"><button>gamekiller.net</button></a>
+                                </tr>
+                            </table>
+                        </p>
+                    </section>
+
+                    <section class="main-section" id="usb-debugging">
+                        <header>Error Code: UsbDebugging</header>
+                        <p>
+                            This error means that you have usb debugging enabled in the developer settings. turn them off my navigating to System/Developer Options in your phones
+                            settings. Learn more about usb debugging here: <br></br>
+                            <a href="https://www.nextpit.com/how-to-enable-usb-debugging-on-any-android-device" target="_blank"><button>Learn More</button></a>
+                        </p>
+                    </section>
+
+                    <section class="main-section" id="parallel-space">
+                        <header>Error Code: ParalelSpace</header>
+                        <p>
+                            You are running this game in a parallel space / app cloning app. In order to play the game run it outside a virtual space. Note that this is
+                            necessary to avoid cheating or hacking.
+                        </p>
+                    </section>
+                </main>
+            </div>
+        </>
+    )
+}
+
+export default ErrorCodePage
