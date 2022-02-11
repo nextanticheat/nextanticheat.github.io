@@ -12,7 +12,7 @@ function StatsPage() {
             <div className="stats">
                 <div className="stats-container">
                     <h3 className="stats-heading">
-                        Welcome to the best Android Anti-Cheat System for Unity Games
+                        Welcome to the best Anti-Cheat System for Android Games
                     </h3>
 
                     <div className="grid">

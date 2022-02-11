@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import ErrorCodes from './pages/error-code';
 import App2 from './app2';
+import Contact from './pages/contact';
 import HashRouter from 'react-router-dom/HashRouter';
 import { useRef, useEffect } from 'react';
 
@@ -15,6 +16,8 @@ function App() {
     <HashRouter>
         <Switch>
           <Route path="/error-codes" component={ErrorCodes}/>
+          <Route path="/contact" component={Contact}/>
+          <Route path="/" component={App2}/>
         </Switch>
     </HashRouter>
   );

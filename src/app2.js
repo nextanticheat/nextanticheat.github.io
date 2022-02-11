@@ -14,8 +14,6 @@ function App2() {
         <Navbar />
         <HeroSection />
         <StatsPage />
-        <GamesPage />
-        <FeaturesPage />
         <EnginesPage />
         <PricingsPage />
         <Footer />

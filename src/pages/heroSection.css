@@ -1,6 +1,7 @@
 .hero-container {
-    background: url("images/img-home.jpg"); 
-    height: 100vh;
+    background-color: #21D4FD;
+    background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+    height: 70vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -20,6 +21,14 @@
     margin-top: 8px;
     color: #fff;
     font-size: 32px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+}
+
+.hero-container .note {
+    margin-top: 8px;
+    color: #fff;
+    font-size: 22px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
 }
