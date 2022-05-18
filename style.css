@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,6 +14,7 @@
     background-image: linear-gradient(37deg, rgba(86, 12, 81, 1) 0%, rgb(42, 17, 75) 50%, rgba(17, 25, 106, 1) 100%);
     background-size: cover;
     background-position: center;
+    position: relative;
 }
 
 .navbar {
@@ -53,6 +58,24 @@
 
 .navbar ul li:hover::after {
     width: 100%;
+}
+
+.toggle_button {
+    width: 30px;
+    height: 23px;
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bar {
+    height: 4px;
+    width: 100%;
+    background: var(--text-color);
+    border-radius: 100px;
 }
 
 .content {
@@ -549,4 +572,39 @@ h5 {
     font-size: 14px;
     word-spacing: 2px;
     text-transform: capitalize;
+}
+
+@media only screen and (max-width: 480px) {
+    html,body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+    }
+
+    button {
+        width: 50%;
+        text-align: center;
+        padding: 14px 0;
+        margin-top: 10px;
+    }
+
+    .countdown {
+        margin-bottom: 50px;
+    }
+
+    .box {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 900px) and (min-width: 481px) {
+    html,body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+    }
 }
