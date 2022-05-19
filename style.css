@@ -60,23 +60,7 @@ html {
     width: 100%;
 }
 
-.toggle_button {
-    width: 30px;
-    height: 23px;
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
 
-.bar {
-    height: 4px;
-    width: 100%;
-    background: var(--text-color);
-    border-radius: 100px;
-}
 
 .content {
     width: 100%;
@@ -168,7 +152,7 @@ button:hover {
 .title h2 {
     color: rgb(240, 240, 240);
     font-size: 40px;
-    width: 1130px;
+    /*width: 1130px;*/
     margin: 30px auto;
     text-align: center;
 }
@@ -243,7 +227,7 @@ h5 {
 .services-title h2 {
     color: rgb(240, 240, 240);
     font-size: 40px;
-    width: 1130px;
+    /*width: 1130px;*/
     margin: 30px auto;
     text-align: center;
 }
@@ -251,7 +235,7 @@ h5 {
 .services-title h1 {
     color: rgb(240, 240, 240);
     font-size: 20px;
-    width: 1130px;
+    /*width: 1130px;*/
     margin: 30px auto;
     text-align: center;
 }
@@ -403,7 +387,7 @@ h5 {
 .review-heading h2 {
     color: rgb(240, 240, 240);
     font-size: 40px;
-    width: 1130px;
+    /*width: 1130px;*/
     margin: 30px auto;
     text-align: center;
 }
@@ -491,7 +475,7 @@ h5 {
 .get-heading h2 {
     color: rgb(240, 240, 240);
     font-size: 30px;
-    width: 1130px;
+    /*width: 1130px;*/
     margin: 30px auto;
     text-align: center;
 }
@@ -499,7 +483,7 @@ h5 {
 .get-container h2 {
     color: rgb(240, 240, 240);
     font-size: 20px;
-    width: 1130px;
+    /*width: 1130px;*/
     margin: 30px auto;
     text-align: center;
 }
@@ -590,6 +574,14 @@ h5 {
         margin-top: 10px;
     }
 
+    .services-col {
+        padding: 0% 15%;
+    }
+
+    .navbar-links {
+        display: none;
+    }
+
     .countdown {
         margin-bottom: 50px;
     }
@@ -606,5 +598,18 @@ h5 {
         margin: 0px;
         padding: 0px;
         overflow-x: hidden;
+    }
+
+    .navbar {
+        width: 100%;
+        margin-left: -10px;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+    }
+
+    .services-col {
+        padding: 0% 15%;
     }
 }
