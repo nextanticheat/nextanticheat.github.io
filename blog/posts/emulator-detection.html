@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Next AntiCheat Blog</title>
+        <link rel="stylesheet" href="../posts/post-page.css">
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+
+    <body>
+        <header>
+            <div class="nav container">
+                <a href="../../index.html" class="logo">NextAntiCheat</a>
+                <button type="button" onclick="window.location.href='https://nextanticheat.me/blog';">BACK</button>
+            </div>
+        </header>
+
+        <section class="post-header">
+            <div class="header-content post-container">
+                <a href="../blog.html" class="back-button">Go Back</a>
+                <h1 class="header-title">Android Emulator Detection: <br>How to do it right</h1>
+                <img src="../../assets/blog/emulator-detection.png" alt="" class="header-img">
+            </div>
+        </section>
+
+        <section class="post-content post-container">
+            <!-- <h2 class="sub-heading">How to be a dumbass</h2> -->
+            <p class="post-text">
+                From time to time Android Developers have faced issues with users running 
+                them on an Android Emulator or in other words a virtual machine to emulate the 
+                Android System.
+                <br><br>
+                You may now ask yourself why Emulators are such a bad thing so let me explain:
+                <br><br>
+                Android Emulators are commonly used by cheaters or people that modify your 
+                app to gain advantages with for example free premium features. Emulators are 
+                really easy to root. (Rooting is basically a way to gain Administrator privileges on 
+                Android. I will go over how you can protect your app against this in another post) 
+                With that being the case it is easier to modify your app. In case your app is a
+                game, people may gain advantages using mouse and keyboard which you may 
+                not want in a competitive game.
+                <br><br>
+            </p>
+            <h2 class="sub-heading">And now to the fun part: How to protect against Emulators!</h2> 
+            <p class="post-text">
+                Well it’s not too hard. Unexperienced users may use badly hidden Emulators that
+                are using certain hardware names such as ‘goldfish’, ‘vbox86’ or other. We can
+                detect these names using this piece of code:
+            </p>
+            <pre><code>
+                public boolean checkHardware() {
+                    String[] hardwareNames = {
+                        "goldfish",
+                        "vbox86",
+                        "nox",
+                        "VM_x86",
+                        "intel",
+                        "amd",
+                        "x86",
+                    };
+                
+                    String hardware = Build.HARDWARE.toLowerCase();
+                
+                    for (String s : hardwareNames) {
+                        if (hardware.equals(s)) {
+                            return true;
+                        }
+                    }
+                }
+            </code></pre>
+            <p class="post-text">
+                Pretty easy until now. But of course there are Emulators that are way more 
+                advanced such as ‘Bluestacks’. This Emulator is pretty good at hiding the fact that
+                it’s an Emulator so we have to get a bit more advanced here. Every emulator 
+                needs some files deep down in the Android System to make Input or Networking 
+                work. We can use these files for our advantage and make a function that will 
+                check for such files. You may ask how to find these file and it’s quite simple.
+                <br><br>
+                Disclaimer: These steps require a normal phone (Needs to be rooted) or 
+                the android system inside an virtualisation software such as VmWare so 
+                you have a android installation without any of the Emulator files. <br>
+                Please look for a tutorial for that on your own. <br><br>
+                Step 1: 
+                Root your Emulator. (Most of the time you can find a root 
+                option in the setting of your Emulator). <br>
+                <br>
+                Step 2: 
+                Download a 'Root File Manager' on your Emulator <br>
+                <br>
+                Step 3: 
+                In case of Bluestacks search for files that have <br>
+                'bluestacks' or 'bst' in their name. <br>
+                <br>
+                Step 4: 
+                On your non Emulator installation (Phone or VmWare) look for 
+                the same file. Keep in mind that some files change by the Android Version 
+                so make sure it really belongs to Bluestacks. <br>
+                <br>
+                Step 5: 
+                You are done.
+                <br><br>
+            </p>
+            <h2 class="sub-heading">Luckily for you I have already found a few of these files using the method above.</h2> 
+            <p class="post-text">
+                "/data/.bluestacks.prop" <br>
+                "/data/.bstconf.prop" <br>
+                "/mnt/windows" <br>
+                "/mnt/windows/BstSharedFolder" <br>
+                "/mnt/prebundledapps/downloads/com.bluestacks.home.apk" <br>
+                "/mnt/prebundledapps/bst_appdetails_bgptest" <br>
+                "/system/priv-app/com.bluestacks.bstfolder.apk" <br>
+
+                <br><br>
+                Of course I won’t share all of the files I found because I want you to do some of 
+                the work yourself so you actually learn something from this :) <br><br>
+
+                Anyways. Here is the code you need to check for these files. You can definitely 
+                expand this code to also detect files from other Emulators such as Nox.
+            </p>
+            <pre><code>
+                public boolean checkFiles() {
+                    String[] files = {
+                        "/data/.bluestacks.prop",
+                        "/data/.bstconf.prop",
+                        "/mnt/windows",
+                        "/mnt/windows/BstSharedFolder",
+                        "/mnt/prebundledapps/downloads/com.bluestacks.home.apk",
+                        "/mnt/prebundledapps/bst_appdetails_bgptest",
+                        "/system/priv-app/com.bluestacks.bstfolder.apk",
+                    };
+                
+                    for (String s : files) {
+                        File f = new File(s);
+                        if (f.exists() && !f.isDirectory()) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            </code></pre>
+            <p class="post-text">
+                Obviously there are many more options to detect Emulators, but this last method 
+                is the most reliable.
+                <br><br>
+            </p>
+            <h2 class="sub-heading">In conclusion:</h2> 
+            <p class="post-text">
+                Detecting Emulators isn’t that hard and there are many more methods that these 
+                two I have showed. Obviously everything can be hacked so there is no 100% way to
+                fully detect emulators so make sure to check out our next article where we show 
+                how you can make your game more secure and protect it.
+                <br><br>
+                If you want an easy solution buy our Anti Cheat :)
+            </p>
+        </section>
+
+        <div class="footer container">
+            <p>Copyright ©2022 EnergyGames / NextAntiCheat</p>
+            <div class="social">
+                <a href="#"><i class="bx bxl-facebook"></i></a>
+                <a href="#"><i class="bx bxl-twitter"></i></a>
+                <a href="#"><i class="bx bxl-instagram"></i></a>
+                <a href="#"><i class="bx bxl-linkedin"></i></a>
+            </div>
+        </div>
+    </body>
+</html>

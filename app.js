@@ -1,4 +1,4 @@
-let launchDate = new Date("May 30, 2022 12:00:00").getTime();
+let launchDate = new Date("Juny 30, 2022 12:00:00").getTime();
 let timer = setInterval(tick, 1000);
 
 function tick () {
