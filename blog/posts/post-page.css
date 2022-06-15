@@ -88,6 +88,12 @@ button {
     width: 100%;
 }
 
+.post-container pre {
+    margin-left: -4px;
+    background-color: #1e1e1e;
+    /* color: #fcfc; */
+}
+
 .header-content {
     display: flex;
     flex-direction: column;
@@ -123,6 +129,13 @@ button {
 
 .sub-heading {
     font-size: 1.2rem;
+    color: #fff;
+}
+
+.sub-heading-new {
+    font-size: 1rem;
+    margin-top: 15px;
+    margin-bottom: -10px;
     color: #fff;
 }
 
@@ -222,6 +235,10 @@ pre {
         height: 340px;
     }
 
+    .post-content {
+        margin-top: 18rem !important;
+    }
+
     .footer {
         flex-direction: column;
         row-gap: 1rem;
@@ -244,7 +261,7 @@ pre {
     }
 
     .post-content {
-        margin-top: 5rem !important;
+        margin-top: 10rem !important;
     }
 
     .post-text {

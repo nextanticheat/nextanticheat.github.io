@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="description" content="Next AntiCheat is the best Android Anti Cheat System. Learn how to stop cheaters from hacking your game">
+        <meta name="keywords" content="Android, App Security, Android App Security, Android Anti Cheat, Anti Cheat Android, Anti Cheat Android System, game developement, best anti cheat, android emulator, android emulator detection, android anti emulator, android anti emulator github">
+        <meta name="author" content="Energygames / NextAntiCheat">
+
+        <meta property="og:title" content="Next-AntiCheat Blog - How to protect your game against cheaters">
+        <meta property="og:description" content="Next AntiCheat is the best Android Anti Cheat System. Learn how to stop cheaters from hacking your game">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="/assets/nextanticheat.png">
+
+        <title>Next AntiCheat Blog</title>
+        <link rel="stylesheet" href="../posts/post-page.css">
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+
+    <body>
+        <header>
+            <div class="nav container">
+                <a href="../../index.html" class="logo">NextAntiCheat</a>
+                <button type="button" onclick="window.location.href='https://nextanticheat.me/blog';">BACK</button>
+            </div>
+        </header>
+
+        <section class="post-header">
+            <div class="header-content post-container">
+                <a href="../../blog.html" class="back-button">Go Back</a>
+                <h1 class="header-title">How to protect your android game against cheaters</h1>
+                <img src="../../assets/blog/cheating-app.png" alt="" class="header-img">
+            </div>
+        </section>
+
+        <section class="post-content post-container">
+            <p class="post-text">
+                Cheating has been a problem for a very long time now, in every competition we have cheaters that 
+                want to gain an advantage over fair players. In this article you will learn about 4 easy steps on how
+                you can protect your game against cheaters.
+                <br><br>
+            </p>
+            <h2 class="sub-heading">How does cheating work?</h2> 
+            <p class="post-text">
+                There are 2 ways to cheat on mobile: <br>
+                1. Memory Editors <br>
+                   Memory editors like GameGuardian are commonly used to manipulate the games memory to 
+                   modify values such as currency, the problem is that this tool makes it hard to detect due to it 
+                   using a random package name everytime its being installed. <br> <br>
+                2. Memory Patch cheats <br>
+                   Memory cheats write to the games shared library (libil2cpp.so for unity games), there are 
+                   usually called hex patches because you override the hex for a certian address in the library. 
+                   Internal cheats like these are easier to detect than memory editors. <br> <br>
+                The following things are not necessary cheating tools but make cheating easier: <br> 
+                1. Android Emulators <br> 
+                   Android Emulators can provide an easy solution for rooting a device (root is basically like 
+                   administrator privileges on android). Root allows you to run previously mentioned tools like 
+                   Game Guardian. Android Emulators also may make your game less competitive because some 
+                   people gain advantages through playing on keyboard and mouse.  <br> <br>
+                2. Parallel Space <br>
+                   There is absolutely no reason for a user to run your app inside a parallel space app. Parallel 
+                   space is usually used to use tools such as GameGuardian without rooting your device. It also 
+                   allows players to not get their main account banned because of cheating. <br> <br>
+                3. Root <br>
+                   As previously mentioned, root allows you to run external cheats and memory editors that are 
+                   hard to detect by the game. <br> <br>
+            </p>
+            <h2 class="sub-heading">Requirements:</h2> 
+            <p class="post-text">
+                1. A android java plugin for unity OR knowledge about JNI in C# <br>
+                I will leave a youtube tutorial I found below <br>
+                https://www.youtube.com/watch?v=bmNMugkOQBI  <br> <br>
+
+                2. A basic knowledge about java <br> <br>
+            </p>
+            <h2 class="sub-heading">4 Ways to detect Cheats on Android</h2> 
+            <h2 class="sub-heading-new">1. Detect Android Emulators</h2> 
+            <p class="post-text">
+                We already make a complete guide <br> https://nextanticheat.me/blog/posts/emulator-detection.html <br>
+                on how to detect Android Emulators, please refer to that.
+                <br> <br>
+            </p>
+            <h2 class="sub-heading-new">2. Internal Cheat Detection</h2> 
+            <p class="post-text">
+                There are a lot of ways to detect if an internal cheat exists inside of the game, we can simply scan <br>  <br>
+
+                /data/app/com.package.name/lib/ <br>   <br>
+                
+                Here we have 2 options, we can check if there are any libs that should not be there, we could 
+                use a list of libraries that are trusted such as: <br>  <br>
+                
+                libil2cpp.so <br>
+                libunity.so  <br>
+                libmain.so  <br>  <br>
+                
+                This system works but is more work than the system I am about to show you.  <br>
+                It uses the same directory, but instead of checking for names, we can check for the amount 
+                of files in this folder, this makes it very easy to update.  <br>
+                The following code will do that:
+
+
+                <pre><code>
+                    public String GetLibraryDirectory() throws PackageManager.NameNotFoundException {
+                        // Get the current activity from untiy through a jni call from C#
+                        String packageName = unityActivity.getPackageName();
+                        
+                        PackageManager packageManager = AndroidPlugin.unityActivity.getPackageManager();
+                        PackageInfo packageInfo = packageManager.getPackageInfo(packageName, 128);
+                        ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+                        
+                        return applicationInfo.nativeLibraryDir;
+                    }
+                
+                public void VerifyLibs() throws PackageManager.NameNotFoundException {
+                        int amount = GetAmountOfFilesInDirectory(GetLibraryDirectory().toString());
+                        if (amount == AndroidPlugin.NormalLibAmount) {
+                            Log.i("", "Nothing detected");
+                        } else {
+                            Log.i("", "Internal Cheat detected");
+                            System.exit(0); //Just an example, you can handle a detection however you want
+                        }
+                    }
+                
+                public int GetAmountOfFilesInDirectory(String path) {
+                    File directory = new File(path);
+                    return directory.listFiles().lengh;
+                }
+                </code></pre>
+                <br>
+            </p>
+            <h2 class="sub-heading-new">3. Root</h2> 
+            <p class="post-text">
+                As already mentioned previously, root can be used to use external cheats like GameGuardian or 
+                external cheats, that do the same thing as internal cheats, just from another app. To do that
+                though, you need root privileges. <br> <br>
+
+                We can check a file called mounts which is located at /proc/mounts in the android file system
+                <br>
+                <pre><code>
+                    public boolean checkForMagisk(View view) throws IOException {
+                        BufferedReader reader;
+                        try {
+                            reader = new BufferedReader(new FileReader("/proc/mounts"));
+                            String line = reader.readLine();
+                            while (line != null) {
+                                if (line.contains("magisk")) {
+                                                    //Handle the detection
+                                    Log.e("", "Magisk Detected");
+                                }
+                                line = reader.readLine();
+                            }
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                </code></pre>
+                <br>
+            </p>
+            <h2 class="sub-heading-new">4. Obfuscation</h2> 
+            <p class="post-text">
+                Obfuscating your code makes it a lot harder to hack your game, I will show you an example: <br>
+
+                Unobfuscated decompiled unity code:
+            </p>
+            <pre><code>
+                private void MyMonobehaviour(string SomeString)
+                {
+                }
+            </code></pre>
+            <p class="post-text">
+                Obfuscated decompiled unity code:
+            </p>
+            <pre><code>
+                private void b(string a)
+                {
+                }
+            </code></pre>
+            <p class="post-text">
+                This makes it way harder to find out what the method actually does. <br> <br>
+                For unity I reccomend you one of the following obfuscators: <br>
+
+                1. https://assetstore.unity.com/packages/tools/utilities/obfuscator-free-89420 <br>
+                2. https://assetstore.unity.com/packages/tools/utilities/obfuscator-48919 <br>
+                <br>
+            </p>
+
+            <h2 class="sub-heading">In conclusion:</h2> 
+            <p class="post-text">
+                It is not that hard to protect your game from cheaters. If you spend a bit of time on 
+                investigating commonly used cheating apps and find out how they work, you can easily extend 
+                this anti cheat with your own detections. If you have questions contact 
+                us on twitter.
+                <br><br>
+                @nextanticheat <br>
+                <br>
+                If you want an easy solution buy our Anti Cheat :)
+            </p>
+        </section>
+
+        <div class="footer container">
+            <p>Copyright ©2022 EnergyGames / NextAntiCheat</p>
+            <div class="social">
+                <a href="#"><i class="bx bxl-facebook"></i></a>
+                <a href="#https://twitter.com/nextanticheat"><i class="bx bxl-twitter"></i></a>
+                <a href="#"><i class="bx bxl-instagram"></i></a>
+                <a href="#"><i class="bx bxl-linkedin"></i></a>
+            </div>
+        </div>
+    </body>
+</html>
