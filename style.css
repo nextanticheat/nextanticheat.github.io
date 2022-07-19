@@ -469,6 +469,70 @@ h5 {
     flex-direction: column;
     width: 100%;
 }
+/*
+.get-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+form {
+    background: rgb(23, 6, 48);
+    display: flex;
+    flex-direction: column;
+    padding: 2vw 4vw;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    transition: .2s ease;
+}
+
+form:hover {
+    background-color: rgb(31, 9, 61);
+    border-radius: 10px;
+    border-color: rgb(49, 13, 99);
+    transform: scale(1.02);
+    transition: .2s ease;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+form h3 {
+    color: rgb(240, 240, 240);
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+form input, form textarea {
+    border: 0;
+    margin: 5px 0;
+    padding: 10px;
+    outline: none;
+    background: #fff;
+    color: rgb(0, 0, 0);
+    resize: none;
+    font-size: 16px;
+    border-radius: 2px;
+}
+
+form button {
+    padding: 15px;
+    background: transparent;
+    color: #fff;
+    font-size: 18px;
+    border: 1px solid #e33058;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 150px;
+    margin: 20px auto 0;
+    border-radius: 30px;
+}
+
+form button:hover {
+    background: #e33058;
+}
+*/
 
 .get-heading h2 {
     color: rgb(240, 240, 240);
