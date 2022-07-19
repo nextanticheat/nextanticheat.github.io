@@ -469,7 +469,7 @@ h5 {
     flex-direction: column;
     width: 100%;
 }
-
+/*
 .get-container {
     display: flex;
     align-items: center;
@@ -532,12 +532,11 @@ form button {
 form button:hover {
     background: #e33058;
 }
-
-/*
+*/
 .get-heading h2 {
     color: rgb(240, 240, 240);
     font-size: 30px;
-    /*width: 1130px;*/ /*
+    /*width: 1130px;*/ 
     margin: 30px auto;
     text-align: center;
 }
@@ -545,11 +544,10 @@ form button:hover {
 .get-container h2 {
     color: rgb(240, 240, 240);
     font-size: 20px;
-    /*width: 1130px;*/ /*
+    /*width: 1130px;*/ 
     margin: 30px auto;
     text-align: center;
 }
-*/
 
 /* Footer */
 .footer {
